@@ -49,6 +49,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddAction.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AddAction.Designer.cs">
+      <DependentUpon>AddAction.cs</DependentUpon>
+    </Compile>
     <Compile Include="CreateAI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -81,6 +87,9 @@
     <Compile Include="tableEditor.Designer.cs">
       <DependentUpon>tableEditor.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="AddAction.resx">
+      <DependentUpon>AddAction.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="CreateAI.resx">
       <DependentUpon>CreateAI.cs</DependentUpon>
     </EmbeddedResource>

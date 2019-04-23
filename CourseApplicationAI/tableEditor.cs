@@ -15,16 +15,19 @@ namespace CourseApplicationAI
         public DataGridView source;
         public CreateAI creator;
 
-        public tableEditor()
+        public tableEditor(CreateAI parent)
         {
             InitializeComponent();
             initPanelVisiable();
             comboBoxStatement.SelectedIndex = 0;
+            attitudeBox.SelectedIndex = 0;
             if (основнаяФорма.imagesPath != "")
             {
                 string[] filesname = Directory.GetFiles(основнаяФорма.imagesPath, "*.png").ToArray<string>();
                 imagesBox.DataSource = filesname;
             }
+            creator = parent;
+            actionBox.DataSource = creator.actions;
         }
 
         private void initPanelVisiable()
@@ -63,22 +66,67 @@ namespace CourseApplicationAI
 
         private void Button1_Click(object sender, EventArgs e)
         {
-            var type = comboBoxStatement.SelectedText;
-
+            var type = comboBoxStatement.SelectedItem as string;
+            MessageBox.Show(comboBoxStatement.SelectedItem as string);
+            object[] parametrs = new object[3] ;
+            string translateType = "";
             switch (type)
             {
                 case "Наблюдаю...":
-                    break;
+                    {
+                        translateType = "watching";
+                        parametrs[0] = imagesBox.SelectedText;
+                        parametrs[1] = distanceBox.Value;
+                    }
+                        break;
                 case "Могу совершить действие...":
+                    {
+                        translateType = "actionAvailable";
+                        parametrs[0] = actionBox.SelectedText;
+                    }
                     break;
                 case "Состояние моего параметра...":
+                    {
+                        translateType = "compare";
+                        parametrs[0] = parametrBox.SelectedText;
+                        parametrs[1] = attitudeBox.SelectedItem.ToString();
+                        parametrs[2] = valueParametr.Value;
+                    }
                     break;
             }
-            Factor newFactor = new Factor()
-            (source.DataSource as List<Factor>).Add()
+            Factor newFactor = new Factor(textBoxID.Text, translateType, parametrs);
+            creator.factors.Add(newFactor);
+            //MessageBox.Show((source.DataSource as List<Factor>).Count.ToString());
+            MessageBox.Show(newFactor.name + " " + newFactor.type);
+            source.DataSource = creator.factors;
+            creator.tableViewFactors.Update();
+            creator.tableViewActions.Update();
+            source.Update();
             this.Close();
+        }
+
+        private void Button2_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show((creator.tableViewActions.DataSource as BindingList<Action>).Count.ToString());
         }
     }
 }
 
-
+/*{
+        this.type = type;
+        switch (type)
+        {
+            case "watching":
+                whatDoesImageAISee = parametrs[0] as string;
+                distanceWatch = (int)parametrs[1];
+                break;
+            case "compare":
+                nameOfComparedParametr = parametrs[0] as string;
+                typeCompare = parametrs[1] as string;
+                valueOfCompare = (int)parametrs[2];
+                break;
+            case "actionAvailable":
+                nameOfAction = parametrs[0] as string;
+                break;
+        }
+    } */

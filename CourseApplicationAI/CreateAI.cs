@@ -14,33 +14,33 @@ namespace CourseApplicationAI
         public CreateAI()
         {
             InitializeComponent();
+
+
             Action goDown = new Action("идти вниз", "", "", null, 0, -1); actions.Add(goDown);
             Action goUp = new Action("идти вверх", "", "", null, 0, 1); actions.Add(goUp);
             Action goRight = new Action("идти вправо", "", "", null, -1, 0); actions.Add(goRight);
             Action goLeft = new Action("идти вправо", "", "", null, 1, 0); actions.Add(goLeft);
             Action stop = new Action("остановиться", "", "", null, 0, 0); actions.Add(stop);
-            Idea ideaGoDown = new Idea(goDown, null); ideas.Add(ideaGoDown);
-            Idea ideaGoUp = new Idea(goUp, null); ideas.Add(ideaGoUp);
-            Idea ideaGoRight = new Idea(goRight, null); ideas.Add(ideaGoRight);
-            Idea ideaGoLeft = new Idea(goLeft, null); ideas.Add(ideaGoLeft);
-            Idea ideaStop = new Idea(stop, null); ideas.Add(ideaStop);
+
             tableViewActions.DataSource = actions;
             tableViewFactors.DataSource = factors;
             tableViewActionsFactors.DataSource = ideas;
+            tableViewParam.DataSource = parametrs;
+            generateIdeaList();
         }
 
-        int currentPanel;
-        List<Image> imagesAI;
-        List<Action> actions = new List<Action>();
-        List<Parametr> parametrs = new List<Parametr>();
-        List<Factor> factors = new List<Factor>();
-        List <Idea> ideas = new List<Idea>();
+        int currentPanel = 0;
+        public BindingList<Image> imagesAI;
+        public BindingList<Action> actions = new BindingList<Action>();
+        public BindingList<Parametr> parametrs = new BindingList<Parametr>();
+        public BindingList<Factor> factors = new BindingList<Factor>();
+        public BindingList<Idea> ideas = new BindingList<Idea>();
 
         private void ButtonAddFactor_Click(object sender, EventArgs e)
         {
-            tableEditor view = new tableEditor();
+            tableEditor view = new tableEditor(this);
             view.source = tableViewFactors;
-            view.creator = this;
+            //view.creator = this;
             view.Show();
         }
 
@@ -63,14 +63,14 @@ namespace CourseApplicationAI
 
         private void BtnAddParam_Click(object sender, EventArgs e)
         {
-            tableViewParam.Rows.Add();
+            (tableViewParam.DataSource as BindingList<Parametr>).Add(new Parametr("", 0));
         }
 
         private void ButtonDeleteFactor_Click(object sender, EventArgs e)
         {
             if ((tableViewFactors.CurrentRow != null))
             {
-                tableViewFactors.Rows.Remove(tableViewFactors.CurrentRow);
+                factors.Remove(tableViewFactors.CurrentRow.DataBoundItem as Factor);
             }
         }
 
@@ -96,16 +96,6 @@ namespace CourseApplicationAI
             }
         }
 
-        private void TableViewActions_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            List<string> names = new List<string>();
-            foreach (var act in actions)
-            {
-                names.Add(act.name);
-            }
-            tableViewActions.DataSource = names;
-        }
-
         private void TableViewActions_SelectionChanged(object sender, EventArgs e)
         {
             if (tableViewActions.CurrentRow.Index < 5)
@@ -117,13 +107,40 @@ namespace CourseApplicationAI
                 btnDeleteAction.Enabled = true;
             }
         }
+
+        private void BtnAddAction_Click(object sender, EventArgs e)
+        {
+            AddAction addAction = new AddAction(this);
+            addAction.Show();
+            generateIdeaList();
+        }
+
+        private void BtnDeleteAction_Click(object sender, EventArgs e)
+        {
+            tableViewActions.Rows.Remove(tableViewActions.CurrentRow);
+            generateIdeaList();
+            //(tableViewActions.DataSource as List<Action>).RemoveAt(tableViewActions.CurrentRow.Index);
+            //tableViewActions.DataSource = actions;
+        }
+
+        public void generateIdeaList()
+        {
+            BindingList<Idea> newideas = new BindingList<Idea>();
+            foreach (var act in actions)
+            {
+                Idea newIdea = new Idea(act, null);
+                newideas.Add(newIdea);
+            }
+            ideas = newideas;
+            tableViewActionsFactors.DataSource = ideas;
+        }
     }
 }
 
-class Parametr
+public class Parametr
 {
-    public string name;
-    public int value;
+    public string name { get; set; }
+    public int value { get; set; }
 
     public Parametr(string n, int val)
     {
@@ -132,10 +149,10 @@ class Parametr
     }
 }
 
-class Factor
+public class Factor
 {
-    public string name;
-    public string type;
+    public string name { get; set; }
+    public string type { get; set; }
     public string nameOfComparedParametr;
     public string typeCompare; // >, < or =
     public int valueOfCompare;
@@ -144,19 +161,20 @@ class Factor
     public int distanceWatch;
     public string nameOfAction;
 
-    public Factor(string type, object[] parametrs)
+    public Factor(string name, string type, object[] parametrs)
     {
+        this.name = name;
         this.type = type;
         switch (type)
         {
             case "watching":
                 whatDoesImageAISee = parametrs[0] as string;
-                distanceWatch = (int)parametrs[1];
+                distanceWatch = Convert.ToInt32(parametrs[1]);
                 break;
             case "compare":
                 nameOfComparedParametr = parametrs[0] as string;
                 typeCompare = parametrs[1] as string;
-                valueOfCompare = (int)parametrs[2];
+                valueOfCompare = Convert.ToInt32(parametrs[2]);
                 break;
             case "actionAvailable":
                 nameOfAction = parametrs[0] as string;
@@ -165,17 +183,17 @@ class Factor
     } 
 }
 
-class Action
+public class Action
 {
     public string name { get; set; }
     public int xDistanceSubject;
     public int yDistanceSubject;
     public int xDistanceObject;
     public int yDistanceObject;
-    public (string, int)[] changesOfParametrs;
+    public List<(Parametr, int)> changesOfParametrs;
     public string changesImage;
     public string actionImage;
-    public Action(string name, string actionimg, string changesimg, (string, int)[] changes, int deltax, int deltay)
+    public Action(string name, string actionimg, string changesimg, List<(Parametr, int)> changes, int deltax, int deltay)
     {
         this.name = name;
         actionImage = actionimg;
@@ -186,7 +204,7 @@ class Action
     }
 }
 
-class Idea
+public class Idea
 {
     public Action action;
     public (Factor, int)[] weights;
@@ -260,7 +278,8 @@ class AI
 
     public void show()
     {
-        AIView.Location = new Point(x, y);
+        AIView.Size = new Size(45, 45);
+        AIView.Location = new Point(x*45, y*45);
         AIView.Image = Static;
         map.Controls.Add(AIView);
         AIView.Show();
@@ -354,10 +373,11 @@ class AI
         AIView.Image = Static;
         foreach (var change in act.changesOfParametrs)
         {
-            foreach (var parametr in parametrs)
+            change.Item1.value += change.Item2;
+            /*foreach (var parametr in parametrs)
             {
-                if (parametr.name == change.Item1) parametr.value += change.Item2;
-            }
+                //if (parametr.name == change.Item1) parametr.value += change.Item2;
+            }*/
         }
 
         if (act.actionImage != "")

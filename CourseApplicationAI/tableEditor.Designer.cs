@@ -48,6 +48,7 @@
             this.actionBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
+            this.comboBoxDirection = new System.Windows.Forms.ComboBox();
             this.panelWatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.distanceBox)).BeginInit();
             this.panelParametr.SuspendLayout();
@@ -80,6 +81,7 @@
             // 
             // panelWatch
             // 
+            this.panelWatch.Controls.Add(this.comboBoxDirection);
             this.panelWatch.Controls.Add(this.label3);
             this.panelWatch.Controls.Add(this.distanceBox);
             this.panelWatch.Controls.Add(this.imagesBox);
@@ -92,7 +94,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(257, 10);
+            this.label3.Location = new System.Drawing.Point(179, 11);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(86, 13);
             this.label3.TabIndex = 3;
@@ -100,7 +102,7 @@
             // 
             // distanceBox
             // 
-            this.distanceBox.Location = new System.Drawing.Point(262, 27);
+            this.distanceBox.Location = new System.Drawing.Point(206, 29);
             this.distanceBox.Maximum = new decimal(new int[] {
             20,
             0,
@@ -112,7 +114,7 @@
             0,
             0});
             this.distanceBox.Name = "distanceBox";
-            this.distanceBox.Size = new System.Drawing.Size(81, 20);
+            this.distanceBox.Size = new System.Drawing.Size(40, 20);
             this.distanceBox.TabIndex = 2;
             this.distanceBox.Value = new decimal(new int[] {
             1,
@@ -125,7 +127,7 @@
             this.imagesBox.FormattingEnabled = true;
             this.imagesBox.Location = new System.Drawing.Point(6, 27);
             this.imagesBox.Name = "imagesBox";
-            this.imagesBox.Size = new System.Drawing.Size(250, 21);
+            this.imagesBox.Size = new System.Drawing.Size(194, 21);
             this.imagesBox.TabIndex = 1;
             // 
             // label2
@@ -144,7 +146,7 @@
             this.panelParametr.Controls.Add(this.label5);
             this.panelParametr.Controls.Add(this.label4);
             this.panelParametr.Controls.Add(this.parametrBox);
-            this.panelParametr.Location = new System.Drawing.Point(335, 7);
+            this.panelParametr.Location = new System.Drawing.Point(335, 73);
             this.panelParametr.Name = "panelParametr";
             this.panelParametr.Size = new System.Drawing.Size(346, 60);
             this.panelParametr.TabIndex = 3;
@@ -187,6 +189,7 @@
             // 
             // parametrBox
             // 
+            this.parametrBox.DisplayMember = "name";
             this.parametrBox.FormattingEnabled = true;
             this.parametrBox.Location = new System.Drawing.Point(6, 27);
             this.parametrBox.Name = "parametrBox";
@@ -196,7 +199,7 @@
             // button1
             // 
             this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button1.Location = new System.Drawing.Point(606, 77);
+            this.button1.Location = new System.Drawing.Point(606, 218);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 4;
@@ -207,18 +210,19 @@
             // button2
             // 
             this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.button2.Location = new System.Drawing.Point(519, 77);
+            this.button2.Location = new System.Drawing.Point(519, 218);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
             this.button2.TabIndex = 5;
             this.button2.Text = "Отмена";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.Button2_Click);
             // 
             // panelAction
             // 
             this.panelAction.Controls.Add(this.label7);
             this.panelAction.Controls.Add(this.actionBox);
-            this.panelAction.Location = new System.Drawing.Point(335, 7);
+            this.panelAction.Location = new System.Drawing.Point(332, 139);
             this.panelAction.Name = "panelAction";
             this.panelAction.Size = new System.Drawing.Size(346, 60);
             this.panelAction.TabIndex = 4;
@@ -234,6 +238,7 @@
             // 
             // actionBox
             // 
+            this.actionBox.DisplayMember = "name";
             this.actionBox.FormattingEnabled = true;
             this.actionBox.Location = new System.Drawing.Point(6, 27);
             this.actionBox.Name = "actionBox";
@@ -256,11 +261,24 @@
             this.textBoxID.Size = new System.Drawing.Size(155, 20);
             this.textBoxID.TabIndex = 7;
             // 
+            // comboBoxDirection
+            // 
+            this.comboBoxDirection.FormattingEnabled = true;
+            this.comboBoxDirection.Items.AddRange(new object[] {
+            "сверху",
+            "слева",
+            "снизу",
+            "справа"});
+            this.comboBoxDirection.Location = new System.Drawing.Point(252, 28);
+            this.comboBoxDirection.Name = "comboBoxDirection";
+            this.comboBoxDirection.Size = new System.Drawing.Size(87, 21);
+            this.comboBoxDirection.TabIndex = 4;
+            // 
             // tableEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 112);
+            this.ClientSize = new System.Drawing.Size(696, 253);
             this.Controls.Add(this.textBoxID);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.panelParametr);
@@ -308,5 +326,6 @@
         private System.Windows.Forms.ComboBox actionBox;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox textBoxID;
+        private System.Windows.Forms.ComboBox comboBoxDirection;
     }
 }

@@ -79,6 +79,7 @@
             this.btnAddAction = new System.Windows.Forms.Button();
             this.tableViewActions = new System.Windows.Forms.DataGridView();
             this.actionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.createAIBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.createAIBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.createAIBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pbStatic)).BeginInit();
@@ -102,6 +103,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.tableViewParam)).BeginInit();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableViewActions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -310,31 +312,32 @@
             // tableViewFactors
             // 
             this.tableViewFactors.AllowUserToAddRows = false;
+            this.tableViewFactors.AllowUserToResizeColumns = false;
             this.tableViewFactors.AllowUserToResizeRows = false;
             this.tableViewFactors.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tableViewFactors.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableViewFactors.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
             this.type});
+            this.tableViewFactors.EditMode = System.Windows.Forms.DataGridViewEditMode.EditProgrammatically;
             this.tableViewFactors.Location = new System.Drawing.Point(6, 24);
             this.tableViewFactors.MultiSelect = false;
             this.tableViewFactors.Name = "tableViewFactors";
             this.tableViewFactors.RowHeadersVisible = false;
-            this.tableViewFactors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tableViewFactors.Size = new System.Drawing.Size(458, 173);
+            this.tableViewFactors.Size = new System.Drawing.Size(443, 173);
             this.tableViewFactors.TabIndex = 0;
             // 
             // name
             // 
+            this.name.DataPropertyName = "name";
             this.name.HeaderText = "Идентификатор";
             this.name.Name = "name";
-            this.name.ReadOnly = true;
             // 
             // type
             // 
+            this.type.DataPropertyName = "type";
             this.type.HeaderText = "Тип";
             this.type.Name = "type";
-            this.type.ReadOnly = true;
             // 
             // panel4
             // 
@@ -404,6 +407,7 @@
             this.btnDeleteAction.TabIndex = 15;
             this.btnDeleteAction.Text = "Удалить действие";
             this.btnDeleteAction.UseVisualStyleBackColor = true;
+            this.btnDeleteAction.Click += new System.EventHandler(this.BtnDeleteAction_Click);
             // 
             // panel5
             // 
@@ -529,11 +533,13 @@
             // 
             // columnName
             // 
+            this.columnName.DataPropertyName = "name";
             this.columnName.HeaderText = "Название";
             this.columnName.Name = "columnName";
             // 
             // columnValue
             // 
+            this.columnValue.DataPropertyName = "value";
             this.columnValue.HeaderText = "Значение по умолчанию (Int)";
             this.columnValue.Name = "columnValue";
             this.columnValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -572,12 +578,13 @@
             // 
             // btnAddAction
             // 
-            this.btnAddAction.Location = new System.Drawing.Point(214, 171);
+            this.btnAddAction.Location = new System.Drawing.Point(296, 171);
             this.btnAddAction.Name = "btnAddAction";
             this.btnAddAction.Size = new System.Drawing.Size(75, 23);
             this.btnAddAction.TabIndex = 2;
             this.btnAddAction.Text = "Добавить";
             this.btnAddAction.UseVisualStyleBackColor = true;
+            this.btnAddAction.Click += new System.EventHandler(this.BtnAddAction_Click);
             // 
             // tableViewActions
             // 
@@ -603,6 +610,10 @@
             this.actionName.HeaderText = "Название действия";
             this.actionName.Name = "actionName";
             this.actionName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // createAIBindingSource2
+            // 
+            this.createAIBindingSource2.DataSource = typeof(CourseApplicationAI.CreateAI);
             // 
             // createAIBindingSource
             // 
@@ -655,6 +666,7 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableViewActions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -679,7 +691,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonAddFactor;
         private System.Windows.Forms.Button buttonDeleteFactor;
-        private System.Windows.Forms.DataGridView tableViewFactors;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel5;
@@ -696,17 +707,12 @@
         private System.Windows.Forms.PictureBox pbActionLeft;
         private System.Windows.Forms.PictureBox pbActionUp;
         private System.Windows.Forms.PictureBox pbActionRight;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn columnValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn type;
         private System.Windows.Forms.TextBox nameAI;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnDeleteAction;
         private System.Windows.Forms.Button btnAddActionDescription;
         private System.Windows.Forms.DataGridView tableViewActionsFactors;
         private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.DataGridView tableViewActions;
         private System.Windows.Forms.Button btnAddAction;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.BindingSource createAIBindingSource;
@@ -714,5 +720,12 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn actionName;
         private System.Windows.Forms.DataGridViewTextBoxColumn action;
         private System.Windows.Forms.DataGridViewCheckBoxColumn status;
+        private System.Windows.Forms.BindingSource createAIBindingSource2;
+        public System.Windows.Forms.DataGridView tableViewFactors;
+        private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn type;
+        public System.Windows.Forms.DataGridView tableViewActions;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn columnValue;
     }
 }

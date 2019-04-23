@@ -176,7 +176,6 @@ namespace CourseApplicationAI
                     str_hash += str[i];
                     i++;
                 }
-                //MessageBox.Show(str_hash);
                 foreach (Control picture in this.панельОтображающаяКарту.Controls)
                 {
                     if (picture.GetType().ToString() == "System.Windows.Forms.PictureBox")
