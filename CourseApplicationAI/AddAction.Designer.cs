@@ -30,6 +30,8 @@
         {
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.tableActionsParametrs = new System.Windows.Forms.DataGridView();
+            this.parametr = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.valueChange = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.buttonPlus = new System.Windows.Forms.Button();
@@ -40,8 +42,6 @@
             this.comboBoxTo = new System.Windows.Forms.ComboBox();
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.buttonOK = new System.Windows.Forms.Button();
-            this.parametr = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.valueChange = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.tableActionsParametrs)).BeginInit();
             this.SuspendLayout();
             // 
@@ -76,6 +76,19 @@
             this.tableActionsParametrs.Size = new System.Drawing.Size(390, 77);
             this.tableActionsParametrs.TabIndex = 1;
             // 
+            // parametr
+            // 
+            this.parametr.DataPropertyName = "current";
+            this.parametr.HeaderText = "Параметр";
+            this.parametr.Name = "parametr";
+            // 
+            // valueChange
+            // 
+            this.valueChange.DataPropertyName = "deltaValue";
+            this.valueChange.FillWeight = 130F;
+            this.valueChange.HeaderText = "изменить значение на <Int> за ход";
+            this.valueChange.Name = "valueChange";
+            // 
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(12, 44);
@@ -100,6 +113,7 @@
             this.buttonPlus.TabIndex = 4;
             this.buttonPlus.Text = "+";
             this.buttonPlus.UseVisualStyleBackColor = true;
+            this.buttonPlus.Click += new System.EventHandler(this.ButtonPlus_Click);
             // 
             // buttonMinus
             // 
@@ -109,6 +123,7 @@
             this.buttonMinus.TabIndex = 5;
             this.buttonMinus.Text = "-";
             this.buttonMinus.UseVisualStyleBackColor = true;
+            this.buttonMinus.Click += new System.EventHandler(this.ButtonMinus_Click);
             // 
             // comboBoxFrom
             // 
@@ -165,19 +180,6 @@
             this.buttonOK.Text = "Добавить";
             this.buttonOK.UseVisualStyleBackColor = true;
             this.buttonOK.Click += new System.EventHandler(this.ButtonOK_Click);
-            // 
-            // parametr
-            // 
-            this.parametr.DataPropertyName = "current";
-            this.parametr.HeaderText = "Параметр";
-            this.parametr.Name = "parametr";
-            // 
-            // valueChange
-            // 
-            this.valueChange.DataPropertyName = "deltaValue";
-            this.valueChange.FillWeight = 130F;
-            this.valueChange.HeaderText = "изменить значение на <Int> за ход";
-            this.valueChange.Name = "valueChange";
             // 
             // AddAction
             // 

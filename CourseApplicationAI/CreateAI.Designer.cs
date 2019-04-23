@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CreateAI));
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pbStatic = new System.Windows.Forms.PictureBox();
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonForward = new System.Windows.Forms.Button();
@@ -138,6 +139,7 @@
             this.buttonForward.TabIndex = 2;
             this.buttonForward.Text = "Вперёд >";
             this.buttonForward.UseVisualStyleBackColor = true;
+            this.buttonForward.Click += new System.EventHandler(this.ButtonForward_Click);
             // 
             // buttonBack
             // 
@@ -357,6 +359,7 @@
             this.btnAddActionDescription.TabIndex = 14;
             this.btnAddActionDescription.Text = "Определить";
             this.btnAddActionDescription.UseVisualStyleBackColor = true;
+            this.btnAddActionDescription.Click += new System.EventHandler(this.BtnAddActionDescription_Click);
             // 
             // tableViewActionsFactors
             // 
@@ -371,7 +374,7 @@
             this.tableViewActionsFactors.MultiSelect = false;
             this.tableViewActionsFactors.Name = "tableViewActionsFactors";
             this.tableViewActionsFactors.RowHeadersVisible = false;
-            this.tableViewActionsFactors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.tableViewActionsFactors.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.tableViewActionsFactors.Size = new System.Drawing.Size(448, 150);
             this.tableViewActionsFactors.TabIndex = 13;
             // 
@@ -469,6 +472,11 @@
             // nUDY
             // 
             this.nUDY.Location = new System.Drawing.Point(31, 56);
+            this.nUDY.Maximum = new decimal(new int[] {
+            15,
+            0,
+            0,
+            0});
             this.nUDY.Name = "nUDY";
             this.nUDY.Size = new System.Drawing.Size(120, 20);
             this.nUDY.TabIndex = 1;
@@ -476,6 +484,11 @@
             // nUDX
             // 
             this.nUDX.Location = new System.Drawing.Point(31, 31);
+            this.nUDX.Maximum = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
             this.nUDX.Name = "nUDX";
             this.nUDX.Size = new System.Drawing.Size(120, 20);
             this.nUDX.TabIndex = 0;
@@ -540,6 +553,8 @@
             // columnValue
             // 
             this.columnValue.DataPropertyName = "value";
+            dataGridViewCellStyle2.NullValue = null;
+            this.columnValue.DefaultCellStyle = dataGridViewCellStyle2;
             this.columnValue.HeaderText = "Значение по умолчанию (Int)";
             this.columnValue.Name = "columnValue";
             this.columnValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
@@ -711,7 +726,6 @@
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Button btnDeleteAction;
         private System.Windows.Forms.Button btnAddActionDescription;
-        private System.Windows.Forms.DataGridView tableViewActionsFactors;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button btnAddAction;
         private System.Windows.Forms.Label label4;
@@ -727,5 +741,6 @@
         public System.Windows.Forms.DataGridView tableViewActions;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnValue;
+        public System.Windows.Forms.DataGridView tableViewActionsFactors;
     }
 }

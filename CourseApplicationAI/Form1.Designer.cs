@@ -341,6 +341,7 @@
             this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.сгенерироватьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.иИToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.создатьИИToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.режимToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.редактированиеToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.визулизацияButton = new System.Windows.Forms.ToolStripMenuItem();
@@ -349,7 +350,6 @@
             this.testButton = new System.Windows.Forms.Button();
             this.testText = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.создатьИИToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.панельОтображающаяКарту.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox201)).BeginInit();
@@ -4958,6 +4958,13 @@
             this.иИToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.иИToolStripMenuItem.Text = "ИИ";
             // 
+            // создатьИИToolStripMenuItem
+            // 
+            this.создатьИИToolStripMenuItem.Name = "создатьИИToolStripMenuItem";
+            this.создатьИИToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьИИToolStripMenuItem.Text = "Создать ИИ...";
+            this.создатьИИToolStripMenuItem.Click += new System.EventHandler(this.СоздатьИИToolStripMenuItem_Click);
+            // 
             // режимToolStripMenuItem
             // 
             this.режимToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -5036,13 +5043,6 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // создатьИИToolStripMenuItem
-            // 
-            this.создатьИИToolStripMenuItem.Name = "создатьИИToolStripMenuItem";
-            this.создатьИИToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.создатьИИToolStripMenuItem.Text = "Создать ИИ...";
-            this.создатьИИToolStripMenuItem.Click += new System.EventHandler(this.СоздатьИИToolStripMenuItem_Click);
             // 
             // основнаяФорма
             // 

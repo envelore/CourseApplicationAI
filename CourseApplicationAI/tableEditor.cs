@@ -20,6 +20,8 @@ namespace CourseApplicationAI
             InitializeComponent();
             initPanelVisiable();
             comboBoxStatement.SelectedIndex = 0;
+            comboBoxDirection.SelectedIndex = 0;
+            parametrBox.DataSource = parent.parametrs;
             attitudeBox.SelectedIndex = 0;
             if (основнаяФорма.imagesPath != "")
             {
@@ -67,7 +69,7 @@ namespace CourseApplicationAI
         private void Button1_Click(object sender, EventArgs e)
         {
             var type = comboBoxStatement.SelectedItem as string;
-            MessageBox.Show(comboBoxStatement.SelectedItem as string);
+            //MessageBox.Show(comboBoxStatement.SelectedItem as string);
             object[] parametrs = new object[3] ;
             string translateType = "";
             switch (type)
@@ -77,6 +79,7 @@ namespace CourseApplicationAI
                         translateType = "watching";
                         parametrs[0] = imagesBox.SelectedText;
                         parametrs[1] = distanceBox.Value;
+                        parametrs[2] = comboBoxDirection.SelectedText;
                     }
                         break;
                 case "Могу совершить действие...":
@@ -97,7 +100,7 @@ namespace CourseApplicationAI
             Factor newFactor = new Factor(textBoxID.Text, translateType, parametrs);
             creator.factors.Add(newFactor);
             //MessageBox.Show((source.DataSource as List<Factor>).Count.ToString());
-            MessageBox.Show(newFactor.name + " " + newFactor.type);
+            //MessageBox.Show(newFactor.name + " " + newFactor.type);
             source.DataSource = creator.factors;
             creator.tableViewFactors.Update();
             creator.tableViewActions.Update();
@@ -107,7 +110,8 @@ namespace CourseApplicationAI
 
         private void Button2_Click(object sender, EventArgs e)
         {
-            MessageBox.Show((creator.tableViewActions.DataSource as BindingList<Action>).Count.ToString());
+            this.Close();
+            //MessageBox.Show((creator.tableViewActions.DataSource as BindingList<Action>).Count.ToString());
         }
     }
 }

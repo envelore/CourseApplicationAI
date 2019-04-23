@@ -216,7 +216,7 @@ namespace CourseApplicationAI
 
         private void СоздатьИИToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateAI view = new CreateAI();
+            CreateAI view = new CreateAI(this.панельОтображающаяКарту);
             view.Show();
         }
     }

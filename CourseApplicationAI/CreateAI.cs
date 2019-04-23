@@ -11,11 +11,11 @@ namespace CourseApplicationAI
 {
     public partial class CreateAI : Form
     {
-        public CreateAI()
+        public CreateAI(Panel map)
         {
             InitializeComponent();
 
-
+            this.map = map;
             Action goDown = new Action("идти вниз", "", "", null, 0, -1); actions.Add(goDown);
             Action goUp = new Action("идти вверх", "", "", null, 0, 1); actions.Add(goUp);
             Action goRight = new Action("идти вправо", "", "", null, -1, 0); actions.Add(goRight);
@@ -35,6 +35,7 @@ namespace CourseApplicationAI
         public BindingList<Parametr> parametrs = new BindingList<Parametr>();
         public BindingList<Factor> factors = new BindingList<Factor>();
         public BindingList<Idea> ideas = new BindingList<Idea>();
+        public Panel map;
 
         private void ButtonAddFactor_Click(object sender, EventArgs e)
         {
@@ -134,6 +135,45 @@ namespace CourseApplicationAI
             ideas = newideas;
             tableViewActionsFactors.DataSource = ideas;
         }
+
+        private void BtnAddActionDescription_Click(object sender, EventArgs e)
+        {
+            if (tableViewActionsFactors.CurrentRow.Cells[1] as DataGridViewTextBoxCell != null)
+            {
+                MessageBox.Show((tableViewActionsFactors.CurrentRow.Cells[1] as DataGridViewTextBoxCell).Value as string);
+                Idea act = ideas.First<Idea>(a => a.name == (tableViewActionsFactors.CurrentRow.Cells[1] as DataGridViewTextBoxCell).Value as string);
+                IdeasBaseForm form = new IdeasBaseForm(this, act, tableViewActionsFactors.CurrentRow);
+                form.Show();
+            }
+        }
+
+        private void ButtonForward_Click(object sender, EventArgs e)
+        {
+            if (currentPanel < 5)
+                currentPanel++;
+            else
+            {
+                AI bot = new AI(Convert.ToInt32(nUDX.Value),
+                    Convert.ToInt32(nUDY.Value),
+                    map,
+                    pbActionDown.Image,
+                    pbActionUp.Image,
+                    pbActionLeft.Image,
+                    pbActionRight.Image,
+                    pbGoUp.Image,
+                    pbGoDown.Image,
+                    pbGoLeft.Image,
+                    pbGoRight.Image,
+                    pbStatic.Image,
+                    actions,
+                    parametrs,
+                    factors,
+                    ideas);
+                bot.show();
+                bot.smartLife();
+                this.Close();
+            }
+        }
     }
 }
 
@@ -159,6 +199,7 @@ public class Factor
     public string actionName;
     public string whatDoesImageAISee;
     public int distanceWatch;
+    public string direction;
     public string nameOfAction;
 
     public Factor(string name, string type, object[] parametrs)
@@ -170,6 +211,7 @@ public class Factor
             case "watching":
                 whatDoesImageAISee = parametrs[0] as string;
                 distanceWatch = Convert.ToInt32(parametrs[1]);
+                direction = parametrs[2] as string;
                 break;
             case "compare":
                 nameOfComparedParametr = parametrs[0] as string;
@@ -207,10 +249,10 @@ public class Action
 public class Idea
 {
     public Action action;
-    public (Factor, int)[] weights;
+    public List<(Factor, int)> weights;
     public string name { get; set; }
 
-    public Idea(Action act, (Factor, int)[] weights)
+    public Idea(Action act, List<(Factor, int)> weights)
     {
         action = act; this.weights = weights;
         name = act.name;
@@ -223,7 +265,6 @@ class AI
     int x;
     int y;
     public /*ref*/ Panel map;
-    string pathToImages = "";
     Image actionDown;
     Image actionUp;
     Image actionLeft;
@@ -233,16 +274,15 @@ class AI
     Image goLeft;
     Image goRight;
     Image Static;
-    Action[] actions = { };
-    Parametr[] parametrs = { };
-    Factor[] factors = { };
-    Idea[] ideas;
-    PictureBox AIView;
+    BindingList<Action> actions;
+    BindingList<Parametr> parametrs;
+    BindingList<Factor> factors;
+    BindingList<Idea> ideas;
+    PictureBox AIView = new PictureBox();
 
     public AI(  int x,
                 int y,
                 Panel map,
-                string pathToImages,
                 Image actionDown,
                 Image actionUp,
                 Image actionLeft,
@@ -252,15 +292,14 @@ class AI
                 Image goLeft,
                 Image goRight,
                 Image Static,
-                Action[] actions,
-                Parametr[] parametrs,
-                Factor[] factors,
-                Idea[] ideas)
+                BindingList<Action> actions,
+                BindingList<Parametr> parametrs,
+                BindingList<Factor> factors,
+                BindingList<Idea> ideas)
     {
         this.x = x;
         this.y = y;
         this.map = map;
-        this.pathToImages = pathToImages;
         this.actionDown = actionDown;
         this.actionUp = actionUp;
         this.actionLeft = actionLeft;
@@ -278,10 +317,20 @@ class AI
 
     public void show()
     {
+        AIView.SizeMode = PictureBoxSizeMode.Zoom;
         AIView.Size = new Size(45, 45);
         AIView.Location = new Point(x*45, y*45);
         AIView.Image = Static;
+        /*foreach (Control picture in map.Controls)
+        {
+            if (picture.GetType().ToString() == "System.Windows.Forms.PictureBox")
+            {
+                var pic = picture as PictureBox;
+                pic.Hide();
+            }
+        }*/
         map.Controls.Add(AIView);
+        AIView.BringToFront();
         AIView.Show();
     }
 
