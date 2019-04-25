@@ -27,13 +27,12 @@ namespace CourseApplicationAI
 
         private void ButtonOK_Click(object sender, EventArgs e)
         {
-            List<(Factor, int)> weights = new List<(Factor, int)>();
+            List<(Factor, double)> weights = new List<(Factor, double)>();
             foreach (DataGridViewRow row in tableViewFactorsAct.Rows)
             {
                 if (row.Index != tableViewFactorsAct.Rows.Count-1)
                 {
-                    MessageBox.Show(row.Index.ToString());
-                    (Factor, int) weight = (null, 0);
+                    (Factor, double) weight = (null, 0);
                     foreach (var cell in row.Cells)
                     {
                         if (cell as DataGridViewComboBoxCell != null)
@@ -43,7 +42,7 @@ namespace CourseApplicationAI
                         }
                         if (cell as DataGridViewTextBoxCell != null)
                         {
-                            weight.Item2 = Convert.ToInt32((cell as DataGridViewTextBoxCell).Value as string);
+                            weight.Item2 = Convert.ToDouble((cell as DataGridViewTextBoxCell).Value as string);
                         }
                     }
                     weights.Add(weight);
@@ -51,6 +50,11 @@ namespace CourseApplicationAI
             }
             source.ideas.First<Idea>(i => i.name == textBoxAction.Text).weights = weights;
             (row.Cells[0] as DataGridViewCheckBoxCell).Value = true;
+            /*MessageBox.Show(source.ideas.First<Idea>(i => i.name == textBoxAction.Text).name);
+            foreach ( var w in weights)
+            {
+                MessageBox.Show(w.Item1.name + " : " + w.Item2.ToString());
+            }*/
             this.Close();
         }
     }

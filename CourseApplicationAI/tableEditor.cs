@@ -77,22 +77,22 @@ namespace CourseApplicationAI
                 case "Наблюдаю...":
                     {
                         translateType = "watching";
-                        parametrs[0] = imagesBox.SelectedText;
+                        parametrs[0] = imagesBox.Text;
                         parametrs[1] = distanceBox.Value;
-                        parametrs[2] = comboBoxDirection.SelectedText;
+                        parametrs[2] = comboBoxDirection.Text;
                     }
                         break;
                 case "Могу совершить действие...":
                     {
                         translateType = "actionAvailable";
-                        parametrs[0] = actionBox.SelectedText;
+                        parametrs[0] = actionBox.Text;
                     }
                     break;
                 case "Состояние моего параметра...":
                     {
                         translateType = "compare";
-                        parametrs[0] = parametrBox.SelectedText;
-                        parametrs[1] = attitudeBox.SelectedItem.ToString();
+                        parametrs[0] = parametrBox.Text;
+                        parametrs[1] = attitudeBox.Text;
                         parametrs[2] = valueParametr.Value;
                     }
                     break;

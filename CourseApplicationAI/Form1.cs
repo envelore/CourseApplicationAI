@@ -102,6 +102,13 @@ namespace CourseApplicationAI
             return ms.ToArray();
         }
 
+        public static string getMD5fromImage(Image pic)
+        {
+            byte[] buffer = imageToByteArray(pic);
+            var hash = getMd5Hash(buffer);
+            return hash;
+        }
+
         private void СохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
             List<string> content = new List<string>();
@@ -216,7 +223,7 @@ namespace CourseApplicationAI
 
         private void СоздатьИИToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreateAI view = new CreateAI(this.панельОтображающаяКарту);
+            CreateAI view = new CreateAI(this.панельОтображающаяКарту, this);
             view.Show();
         }
     }

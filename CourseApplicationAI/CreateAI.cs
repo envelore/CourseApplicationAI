@@ -3,23 +3,29 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
 namespace CourseApplicationAI
 {
+
+    [Serializable]
     public partial class CreateAI : Form
     {
-        public CreateAI(Panel map)
+        public CreateAI(Panel map, основнаяФорма src)
         {
             InitializeComponent();
-
+            source = src;
             this.map = map;
-            Action goDown = new Action("идти вниз", "", "", null, 0, -1); actions.Add(goDown);
-            Action goUp = new Action("идти вверх", "", "", null, 0, 1); actions.Add(goUp);
-            Action goRight = new Action("идти вправо", "", "", null, -1, 0); actions.Add(goRight);
-            Action goLeft = new Action("идти вправо", "", "", null, 1, 0); actions.Add(goLeft);
+            Action goDown = new Action("идти вниз", "", "", null, 0, 1); actions.Add(goDown);
+            Action goUp = new Action("идти вверх", "", "", null, 0, -1); actions.Add(goUp);
+            Action goRight = new Action("идти вправо", "", "", null, 1, 0); actions.Add(goRight);
+            Action goLeft = new Action("идти влево", "", "", null, -1, 0); actions.Add(goLeft);
             Action stop = new Action("остановиться", "", "", null, 0, 0); actions.Add(stop);
 
             tableViewActions.DataSource = actions;
@@ -27,6 +33,12 @@ namespace CourseApplicationAI
             tableViewActionsFactors.DataSource = ideas;
             tableViewParam.DataSource = parametrs;
             generateIdeaList();
+            panel1.Show();
+            panel4.Hide();
+            panel3.Hide();
+            panel5.Hide();
+            panel6.Hide();
+            panel2.Hide();
         }
 
         int currentPanel = 0;
@@ -36,6 +48,7 @@ namespace CourseApplicationAI
         public BindingList<Factor> factors = new BindingList<Factor>();
         public BindingList<Idea> ideas = new BindingList<Idea>();
         public Panel map;
+        public основнаяФорма source;
 
         private void ButtonAddFactor_Click(object sender, EventArgs e)
         {
@@ -140,7 +153,6 @@ namespace CourseApplicationAI
         {
             if (tableViewActionsFactors.CurrentRow.Cells[1] as DataGridViewTextBoxCell != null)
             {
-                MessageBox.Show((tableViewActionsFactors.CurrentRow.Cells[1] as DataGridViewTextBoxCell).Value as string);
                 Idea act = ideas.First<Idea>(a => a.name == (tableViewActionsFactors.CurrentRow.Cells[1] as DataGridViewTextBoxCell).Value as string);
                 IdeasBaseForm form = new IdeasBaseForm(this, act, tableViewActionsFactors.CurrentRow);
                 form.Show();
@@ -150,7 +162,40 @@ namespace CourseApplicationAI
         private void ButtonForward_Click(object sender, EventArgs e)
         {
             if (currentPanel < 5)
+            {
                 currentPanel++;
+                switch (currentPanel)
+                {
+                    case 0:
+                        panel1.Show();
+                        panel2.Hide();
+                        break;
+                    case 1:
+                        panel1.Hide();
+                        panel3.Hide();
+                        panel2.Show();
+                        break;
+                    case 2:
+                        panel2.Hide();
+                        panel4.Hide();
+                        panel3.Show();
+                        break;
+                    case 3:
+                        panel3.Hide();
+                        panel5.Hide();
+                        panel4.Show();
+                        break;
+                    case 4:
+                        panel4.Hide();
+                        panel6.Hide();
+                        panel5.Show();
+                        break;
+                    case 5:
+                        panel5.Hide();
+                        panel6.Show();
+                        break;
+                }
+            }
             else
             {
                 AI bot = new AI(Convert.ToInt32(nUDX.Value),
@@ -168,10 +213,87 @@ namespace CourseApplicationAI
                     actions,
                     parametrs,
                     factors,
-                    ideas);
+                    ideas,
+                    source);
                 bot.show();
-                bot.smartLife();
-                this.Close();
+                //bot.smartLife();
+                Action goDown = new Action("идти вниз", "", "", null, 0, -1);
+                Action goUp = new Action("идти вверх", "", "", null, 0, 1);
+                Action goRight = new Action("идти вправо", "", "", null, -1, 0);
+                Action goLeft = new Action("идти вправо", "", "", null, 1, 0);
+                Action[] acts = { goDown, goLeft, goUp, goRight };
+
+                Timer timer = new Timer();
+                timer.Interval = 900; // каждые 30 миллисекунд
+                int count = 0;
+                int max = 48;
+                timer.Tick += new EventHandler((o, ev) =>
+                {
+                    //bot.action(acts[count % 4]);
+                    bot.smartLife();
+                    count++;
+                    if (count == max)
+                    {
+                        Timer t = o as Timer; // можно тут просто воспользоваться timer
+                        t.Stop();
+                    }
+                });
+                timer.Start();
+                this.Hide();
+            }
+        }
+
+        private void BtnSaveSettings_Click(object sender, EventArgs e)
+        {
+            var path = "";
+            var dialog = new SaveFileDialog();
+            dialog.AddExtension = true;
+            dialog.Filter = "Бот(*.bot)|*.bot";
+            dialog.ShowDialog();
+            path = dialog.FileName;
+            BinaryFormatter binFormat = new BinaryFormatter();
+            using (Stream fStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None))
+            {
+                binFormat.Serialize(fStream, this);
+            }
+        }
+
+        private void ButtonBack_Click(object sender, EventArgs e)
+        {
+            if (currentPanel > 0)
+            {
+                currentPanel--;
+                switch (currentPanel)
+                {
+                    case 0:
+                        panel1.Show();
+                        panel2.Hide();
+                        break;
+                    case 1:
+                        panel1.Hide();
+                        panel3.Hide();
+                        panel2.Show();
+                        break;
+                    case 2:
+                        panel2.Hide();
+                        panel4.Hide();
+                        panel3.Show();
+                        break;
+                    case 3:
+                        panel3.Hide();
+                        panel5.Hide();
+                        panel4.Show();
+                        break;
+                    case 4:
+                        panel4.Hide();
+                        panel6.Hide();
+                        panel5.Show();
+                        break;
+                    case 5:
+                        panel5.Hide();
+                        panel6.Show();
+                        break;
+                }
             }
         }
     }
@@ -249,10 +371,10 @@ public class Action
 public class Idea
 {
     public Action action;
-    public List<(Factor, int)> weights;
+    public List<(Factor, double)> weights;
     public string name { get; set; }
 
-    public Idea(Action act, List<(Factor, int)> weights)
+    public Idea(Action act, List<(Factor, double)> weights)
     {
         action = act; this.weights = weights;
         name = act.name;
@@ -279,7 +401,8 @@ class AI
     BindingList<Factor> factors;
     BindingList<Idea> ideas;
     PictureBox AIView = new PictureBox();
-
+    Dictionary<(int, int), PictureBox> boxes = new Dictionary<(int, int), PictureBox>();
+    CourseApplicationAI.основнаяФорма src;
     public AI(  int x,
                 int y,
                 Panel map,
@@ -295,7 +418,8 @@ class AI
                 BindingList<Action> actions,
                 BindingList<Parametr> parametrs,
                 BindingList<Factor> factors,
-                BindingList<Idea> ideas)
+                BindingList<Idea> ideas,
+                CourseApplicationAI.основнаяФорма src)
     {
         this.x = x;
         this.y = y;
@@ -313,7 +437,16 @@ class AI
         this.parametrs = parametrs;
         this.factors = factors;
         this.ideas = ideas;
-}
+        this.src = src;
+        foreach (Control picture in map.Controls)
+        {
+            if (picture.GetType().ToString() == "System.Windows.Forms.PictureBox")
+            {
+                var pic = picture as PictureBox;
+                boxes[(pic.Location.X / 45, pic.Location.Y / 45)] = pic;
+            }
+        }
+    }
 
     public void show()
     {
@@ -339,22 +472,82 @@ class AI
         switch (factor.type)
         {
             case "watching":
-                return true;
+                Bitmap img = new Bitmap(factor.whatDoesImageAISee);
+                src.logs.Text += "сравниваю " + factor.direction + " ";
+                var hash = getMD5fromImage(img);
+                switch (factor.direction)
+                {
+                    case "слева":
+                        for (int i = 1; i < factor.distanceWatch+1; i++)
+                        {
+                            src.logs.Text += (getMD5fromImage(boxes[(x - i, y)].Image) == hash).ToString() + " " + (x - i, y).ToString() + "\n";
+                            if (x - i >= 0)
+                                if (getMD5fromImage(boxes[(x - i, y)].Image) == hash)
+                                    return true;
+                            return false;
+                        }
+                        break;
+                    case "справа":
+                        for (int i = 1; i < factor.distanceWatch+1; i++)
+                        {
+                            src.logs.Text += (getMD5fromImage(boxes[(x + i, y)].Image) == hash).ToString() + " " + (x + i, y).ToString() + "\n"; 
+                            if (x + i < 20)
+                                if (getMD5fromImage(boxes[(x + i, y)].Image) == hash)
+                                    return true;
+                            return false;
+                        }
+                        break;
+                    case "снизу":
+                        for (int i = 1; i < factor.distanceWatch+1; i++)
+                        {
+                            src.logs.Text += (getMD5fromImage(boxes[(x, y + i)].Image) == hash).ToString() + " " + (x, y + i).ToString() + "\n";
+                            if (y + i < 15)
+                                if (getMD5fromImage(boxes[(x, y + i)].Image) == hash)
+                                    return true;
+                            return false;
+                        }
+                        break;
+                    case "сверху":
+                        for (int i = 1; i < factor.distanceWatch+1; i++)
+                        {
+                            src.logs.Text += (getMD5fromImage(boxes[(x, y - i)].Image) == hash).ToString() + " " + (x, y - i).ToString() + "\n";
+                            if (y - i < 0)
+                                if (getMD5fromImage(boxes[(x, y - i)].Image) == hash)
+                                    return true;
+                            return false;
+                        }
+                        break;
+                }
+                return false;
               
             case "compare":
-                return true;
+                switch (factor.typeCompare)
+                {
+                    case "<":
+                        return parametrs.First<Parametr>(p => p.name == factor.nameOfComparedParametr).value < factor.valueOfCompare ? true : false;
+                    case "=":
+                        return parametrs.First<Parametr>(p => p.name == factor.nameOfComparedParametr).value < factor.valueOfCompare ? true : false;
+                    case ">":
+                        return parametrs.First<Parametr>(p => p.name == factor.nameOfComparedParametr).value < factor.valueOfCompare ? true : false;
+                }
+                return false;
                 
             case "actionAvailable":
-                return true;
+                if ((boxes[(x + 1, y)].ImageLocation == actions.First<Action>(a => a.name == factor.nameOfAction).actionImage) ||
+                    (boxes[(x, y + 1)].ImageLocation == actions.First<Action>(a => a.name == factor.nameOfAction).actionImage) ||
+                    (boxes[(x - 1, y)].ImageLocation == actions.First<Action>(a => a.name == factor.nameOfAction).actionImage) ||
+                    (boxes[(x, y - 1)].ImageLocation == actions.First<Action>(a => a.name == factor.nameOfAction).actionImage))
+                    return true;
+                else return false;
 
             default:
                 return false;
         }
     }
 
-    public int powerOfIdea(Idea idea)
+    public double powerOfIdea(Idea idea)
     {
-        int result = 0;
+        double result = 0;
         foreach (var factor in idea.weights)
         {
             result += (isFactorPerformed(factor.Item1) ? 1 : 0) * factor.Item2;
@@ -386,25 +579,25 @@ class AI
             if (act.yDistanceObject > 0)
             {
                 AIView.Image = goUp;
-                dy = -5;
+                dy = 5;
             }
             else
             {
                 AIView.Image = goDown;
-                dy = 5;
+                dy = -5;
             }
         }
         if ((dx != 0) || (dy != 0))
         {
             switch (dx, dy)
             {
-                case (-1, 0): AIView.Image = goLeft; break;
-                case (0, -1): AIView.Image = goDown; break;
-                case (1, 0): AIView.Image = goRight; break;
-                case (0, 1): AIView.Image = goUp; break;
+                case (-5, 0):  AIView.Image = goLeft;  break;
+                case (0, 5): AIView.Image = goDown; break;
+                case (5, 0): AIView.Image = goRight; break;
+                case (0, -5): AIView.Image = goUp; break;
             }
             Timer timer = new Timer();
-            timer.Interval = 30; // каждые 30 миллисекунд
+            timer.Interval = 100; // каждые 30 миллисекунд
             int count = 0;
             int max = 9;
             timer.Tick += new EventHandler((o, ev) =>
@@ -414,12 +607,14 @@ class AI
                 if (count == max)
                 {
                     Timer t = o as Timer; // можно тут просто воспользоваться timer
-                t.Stop();
+                    t.Stop();
+                    //AIView.Image = Static;
                 }
             });
             timer.Start();
         }
-        AIView.Image = Static;
+        //
+        if (act.changesOfParametrs != null)
         foreach (var change in act.changesOfParametrs)
         {
             change.Item1.value += change.Item2;
@@ -439,24 +634,24 @@ class AI
                     var pic = picture as PictureBox;
                     if ((pic.Location.X == (x + 1) * 45) && (pic.Location.Y == y * 45) && (pic.ImageLocation == act.actionImage))
                     {
-                        pic.ImageLocation = act.changesImage; AIView.Image = actionRight;
+                        if (act.changesImage != "") pic.ImageLocation = act.changesImage; AIView.Image = actionRight;
                     }
                     if ((pic.Location.X == x * 45) && (pic.Location.Y == (y + 1) * 45) && (pic.ImageLocation == act.actionImage))
                     {
-                        pic.ImageLocation = act.changesImage; AIView.Image = actionDown;
+                        if (act.changesImage != "") pic.ImageLocation = act.changesImage; AIView.Image = actionDown;
                     }
                     if ((pic.Location.X == (x - 1) * 45) && (pic.Location.Y == y * 45) && (pic.ImageLocation == act.actionImage))
                     {
-                        pic.ImageLocation = act.changesImage; AIView.Image = actionLeft;
+                        if (act.changesImage != "") pic.ImageLocation = act.changesImage; AIView.Image = actionLeft;
                     }
                     if ((pic.Location.X == x * 45) && (pic.Location.Y == (y - 1) * 45) && (pic.ImageLocation == act.actionImage))
                     {
-                        pic.ImageLocation = act.changesImage; AIView.Image = actionUp;
+                        if (act.changesImage != "") pic.ImageLocation = act.changesImage; AIView.Image = actionUp;
                     }
                 }
             }
             Timer timer = new Timer();
-            timer.Interval = 30; // каждые 30 миллисекунд
+            timer.Interval = 100; // каждые 30 миллисекунд
             int count = 0;
             int max = 9;
             timer.Tick += new EventHandler((o, ev) =>
@@ -466,20 +661,21 @@ class AI
                 {
                     Timer t = o as Timer; // можно тут просто воспользоваться timer
                     t.Stop();
+                    //AIView.Image = Static;
                 }
             });
             timer.Start();
         }
-        AIView.Image = Static;
+        //
 
     }
 
     public void smartLife()
     {
-        while(true)
+        //while(true)
         {
-            int temp;
-            int max = -9999;
+            double temp;
+            double max = -9999;
             Idea plan = null;
             foreach (var idea in ideas)
             {
@@ -489,8 +685,40 @@ class AI
                     max = temp;
                 }
             }
+            if ((x == 19) && (plan.action.xDistanceObject == 1)) plan = null;
+            if ((x == 0) && (plan.action.xDistanceObject == -1)) plan = null;
+            if ((y == 0) && (plan.action.yDistanceObject == -1)) plan = null;
+            if ((x == 14) && (plan.action.yDistanceObject == 1)) plan = null;
             if (plan != null)
                 action(plan.action);
         }
+    }
+
+    string getMd5Hash(byte[] buffer)
+    {
+        MD5 md5Hasher = MD5.Create();
+
+        byte[] data = md5Hasher.ComputeHash(buffer);
+
+        StringBuilder sBuilder = new StringBuilder();
+        for (int i = 0; i < data.Length; i++)
+        {
+            sBuilder.Append(data[i].ToString("x2"));
+        }
+        return sBuilder.ToString();
+    }
+
+    byte[] imageToByteArray(Image image)
+    {
+        MemoryStream ms = new MemoryStream();
+        image.Save(ms, ImageFormat.Png);
+        return ms.ToArray();
+    }
+
+    public string getMD5fromImage(Image pic)
+    {
+        byte[] buffer = imageToByteArray(pic);
+        var hash = getMd5Hash(buffer);
+        return hash;
     }
 }

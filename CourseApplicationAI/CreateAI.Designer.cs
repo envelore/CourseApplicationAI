@@ -46,21 +46,21 @@
             this.pbActionLeft = new System.Windows.Forms.PictureBox();
             this.pbActionUp = new System.Windows.Forms.PictureBox();
             this.pbActionRight = new System.Windows.Forms.PictureBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.buttonAddFactor = new System.Windows.Forms.Button();
             this.buttonDeleteFactor = new System.Windows.Forms.Button();
             this.tableViewFactors = new System.Windows.Forms.DataGridView();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.type = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel4 = new System.Windows.Forms.Panel();
+            this.panel5 = new System.Windows.Forms.Panel();
             this.btnAddActionDescription = new System.Windows.Forms.Button();
             this.tableViewActionsFactors = new System.Windows.Forms.DataGridView();
             this.action = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.status = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.label3 = new System.Windows.Forms.Label();
             this.btnDeleteAction = new System.Windows.Forms.Button();
-            this.panel5 = new System.Windows.Forms.Panel();
+            this.panel6 = new System.Windows.Forms.Panel();
             this.nameAI = new System.Windows.Forms.TextBox();
             this.label14 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
@@ -68,18 +68,18 @@
             this.label10 = new System.Windows.Forms.Label();
             this.nUDY = new System.Windows.Forms.NumericUpDown();
             this.nUDX = new System.Windows.Forms.NumericUpDown();
-            this.panel7 = new System.Windows.Forms.Panel();
+            this.panel2 = new System.Windows.Forms.Panel();
             this.label13 = new System.Windows.Forms.Label();
-            this.btnAddParam = new System.Windows.Forms.Button();
-            this.tableViewParam = new System.Windows.Forms.DataGridView();
-            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.columnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btnParamDelete = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.btnAddAction = new System.Windows.Forms.Button();
             this.tableViewActions = new System.Windows.Forms.DataGridView();
             this.actionName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnAddParam = new System.Windows.Forms.Button();
+            this.tableViewParam = new System.Windows.Forms.DataGridView();
+            this.columnName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.columnValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnParamDelete = new System.Windows.Forms.Button();
             this.createAIBindingSource2 = new System.Windows.Forms.BindingSource(this.components);
             this.createAIBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.createAIBindingSource1 = new System.Windows.Forms.BindingSource(this.components);
@@ -93,17 +93,17 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbActionLeft)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActionUp)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActionRight)).BeginInit();
-            this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableViewFactors)).BeginInit();
             this.panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableViewActionsFactors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableViewFactors)).BeginInit();
             this.panel5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableViewActionsFactors)).BeginInit();
+            this.panel6.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDY)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDX)).BeginInit();
-            this.panel7.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableViewParam)).BeginInit();
+            this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableViewActions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableViewParam)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource1)).BeginInit();
@@ -122,7 +122,7 @@
             // buttonCancel
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonCancel.Location = new System.Drawing.Point(871, 715);
+            this.buttonCancel.Location = new System.Drawing.Point(858, 627);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(75, 23);
             this.buttonCancel.TabIndex = 1;
@@ -133,7 +133,7 @@
             // 
             this.buttonForward.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonForward.Enabled = false;
-            this.buttonForward.Location = new System.Drawing.Point(790, 715);
+            this.buttonForward.Location = new System.Drawing.Point(777, 627);
             this.buttonForward.Name = "buttonForward";
             this.buttonForward.Size = new System.Drawing.Size(75, 23);
             this.buttonForward.TabIndex = 2;
@@ -144,13 +144,13 @@
             // buttonBack
             // 
             this.buttonBack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonBack.Enabled = false;
-            this.buttonBack.Location = new System.Drawing.Point(709, 715);
+            this.buttonBack.Location = new System.Drawing.Point(696, 627);
             this.buttonBack.Name = "buttonBack";
             this.buttonBack.Size = new System.Drawing.Size(75, 23);
             this.buttonBack.TabIndex = 3;
             this.buttonBack.Text = "< Назад";
             this.buttonBack.UseVisualStyleBackColor = true;
+            this.buttonBack.Click += new System.EventHandler(this.ButtonBack_Click);
             // 
             // pbGoUp
             // 
@@ -271,16 +271,16 @@
             this.pbActionRight.TabIndex = 11;
             this.pbActionRight.TabStop = false;
             // 
-            // panel2
+            // panel4
             // 
-            this.panel2.Controls.Add(this.label2);
-            this.panel2.Controls.Add(this.buttonAddFactor);
-            this.panel2.Controls.Add(this.buttonDeleteFactor);
-            this.panel2.Controls.Add(this.tableViewFactors);
-            this.panel2.Location = new System.Drawing.Point(477, 12);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(464, 229);
-            this.panel2.TabIndex = 12;
+            this.panel4.Controls.Add(this.label2);
+            this.panel4.Controls.Add(this.buttonAddFactor);
+            this.panel4.Controls.Add(this.buttonDeleteFactor);
+            this.panel4.Controls.Add(this.tableViewFactors);
+            this.panel4.Location = new System.Drawing.Point(476, 12);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(458, 229);
+            this.panel4.TabIndex = 12;
             // 
             // label2
             // 
@@ -293,7 +293,7 @@
             // 
             // buttonAddFactor
             // 
-            this.buttonAddFactor.Location = new System.Drawing.Point(305, 203);
+            this.buttonAddFactor.Location = new System.Drawing.Point(287, 203);
             this.buttonAddFactor.Name = "buttonAddFactor";
             this.buttonAddFactor.Size = new System.Drawing.Size(75, 23);
             this.buttonAddFactor.TabIndex = 3;
@@ -303,7 +303,7 @@
             // 
             // buttonDeleteFactor
             // 
-            this.buttonDeleteFactor.Location = new System.Drawing.Point(386, 203);
+            this.buttonDeleteFactor.Location = new System.Drawing.Point(368, 203);
             this.buttonDeleteFactor.Name = "buttonDeleteFactor";
             this.buttonDeleteFactor.Size = new System.Drawing.Size(75, 23);
             this.buttonDeleteFactor.TabIndex = 1;
@@ -341,15 +341,15 @@
             this.type.HeaderText = "Тип";
             this.type.Name = "type";
             // 
-            // panel4
+            // panel5
             // 
-            this.panel4.Controls.Add(this.btnAddActionDescription);
-            this.panel4.Controls.Add(this.tableViewActionsFactors);
-            this.panel4.Controls.Add(this.label3);
-            this.panel4.Location = new System.Drawing.Point(12, 260);
-            this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(458, 221);
-            this.panel4.TabIndex = 13;
+            this.panel5.Controls.Add(this.btnAddActionDescription);
+            this.panel5.Controls.Add(this.tableViewActionsFactors);
+            this.panel5.Controls.Add(this.label3);
+            this.panel5.Location = new System.Drawing.Point(476, 247);
+            this.panel5.Name = "panel5";
+            this.panel5.Size = new System.Drawing.Size(458, 221);
+            this.panel5.TabIndex = 13;
             // 
             // btnAddActionDescription
             // 
@@ -412,19 +412,19 @@
             this.btnDeleteAction.UseVisualStyleBackColor = true;
             this.btnDeleteAction.Click += new System.EventHandler(this.BtnDeleteAction_Click);
             // 
-            // panel5
+            // panel6
             // 
-            this.panel5.Controls.Add(this.nameAI);
-            this.panel5.Controls.Add(this.label14);
-            this.panel5.Controls.Add(this.label12);
-            this.panel5.Controls.Add(this.label11);
-            this.panel5.Controls.Add(this.label10);
-            this.panel5.Controls.Add(this.nUDY);
-            this.panel5.Controls.Add(this.nUDX);
-            this.panel5.Location = new System.Drawing.Point(477, 260);
-            this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(464, 203);
-            this.panel5.TabIndex = 14;
+            this.panel6.Controls.Add(this.nameAI);
+            this.panel6.Controls.Add(this.label14);
+            this.panel6.Controls.Add(this.label12);
+            this.panel6.Controls.Add(this.label11);
+            this.panel6.Controls.Add(this.label10);
+            this.panel6.Controls.Add(this.nUDY);
+            this.panel6.Controls.Add(this.nUDX);
+            this.panel6.Location = new System.Drawing.Point(476, 474);
+            this.panel6.Name = "panel6";
+            this.panel6.Size = new System.Drawing.Size(458, 142);
+            this.panel6.TabIndex = 14;
             // 
             // nameAI
             // 
@@ -493,16 +493,16 @@
             this.nUDX.Size = new System.Drawing.Size(120, 20);
             this.nUDX.TabIndex = 0;
             // 
-            // panel7
+            // panel2
             // 
-            this.panel7.Controls.Add(this.label13);
-            this.panel7.Controls.Add(this.btnAddParam);
-            this.panel7.Controls.Add(this.tableViewParam);
-            this.panel7.Controls.Add(this.btnParamDelete);
-            this.panel7.Location = new System.Drawing.Point(477, 469);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(464, 215);
-            this.panel7.TabIndex = 15;
+            this.panel2.Controls.Add(this.label13);
+            this.panel2.Controls.Add(this.btnAddParam);
+            this.panel2.Controls.Add(this.tableViewParam);
+            this.panel2.Controls.Add(this.btnParamDelete);
+            this.panel2.Location = new System.Drawing.Point(12, 201);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(458, 215);
+            this.panel2.TabIndex = 15;
             // 
             // label13
             // 
@@ -513,73 +513,15 @@
             this.label13.TabIndex = 18;
             this.label13.Text = "Какие параметры могут быть у ИИ? (изменять даблкликом по строке)";
             // 
-            // btnAddParam
-            // 
-            this.btnAddParam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnAddParam.Location = new System.Drawing.Point(293, 189);
-            this.btnAddParam.Name = "btnAddParam";
-            this.btnAddParam.Size = new System.Drawing.Size(75, 23);
-            this.btnAddParam.TabIndex = 17;
-            this.btnAddParam.Text = "Добавить";
-            this.btnAddParam.UseVisualStyleBackColor = true;
-            this.btnAddParam.Click += new System.EventHandler(this.BtnAddParam_Click);
-            // 
-            // tableViewParam
-            // 
-            this.tableViewParam.AllowUserToAddRows = false;
-            this.tableViewParam.AllowUserToResizeRows = false;
-            this.tableViewParam.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.tableViewParam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tableViewParam.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.columnName,
-            this.columnValue});
-            this.tableViewParam.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
-            this.tableViewParam.Location = new System.Drawing.Point(11, 33);
-            this.tableViewParam.MultiSelect = false;
-            this.tableViewParam.Name = "tableViewParam";
-            this.tableViewParam.RowHeadersVisible = false;
-            this.tableViewParam.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
-            this.tableViewParam.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tableViewParam.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tableViewParam.Size = new System.Drawing.Size(438, 150);
-            this.tableViewParam.TabIndex = 0;
-            // 
-            // columnName
-            // 
-            this.columnName.DataPropertyName = "name";
-            this.columnName.HeaderText = "Название";
-            this.columnName.Name = "columnName";
-            // 
-            // columnValue
-            // 
-            this.columnValue.DataPropertyName = "value";
-            dataGridViewCellStyle2.NullValue = null;
-            this.columnValue.DefaultCellStyle = dataGridViewCellStyle2;
-            this.columnValue.HeaderText = "Значение по умолчанию (Int)";
-            this.columnValue.Name = "columnValue";
-            this.columnValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.columnValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
-            // 
-            // btnParamDelete
-            // 
-            this.btnParamDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnParamDelete.Location = new System.Drawing.Point(374, 189);
-            this.btnParamDelete.Name = "btnParamDelete";
-            this.btnParamDelete.Size = new System.Drawing.Size(75, 23);
-            this.btnParamDelete.TabIndex = 16;
-            this.btnParamDelete.Text = "Удалить";
-            this.btnParamDelete.UseVisualStyleBackColor = true;
-            this.btnParamDelete.Click += new System.EventHandler(this.BtnParamDelete_Click);
-            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.label4);
             this.panel3.Controls.Add(this.btnDeleteAction);
             this.panel3.Controls.Add(this.btnAddAction);
             this.panel3.Controls.Add(this.tableViewActions);
-            this.panel3.Location = new System.Drawing.Point(12, 487);
+            this.panel3.Location = new System.Drawing.Point(12, 422);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(455, 197);
+            this.panel3.Size = new System.Drawing.Size(458, 197);
             this.panel3.TabIndex = 16;
             // 
             // label4
@@ -626,6 +568,64 @@
             this.actionName.Name = "actionName";
             this.actionName.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             // 
+            // btnAddParam
+            // 
+            this.btnAddParam.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnAddParam.Location = new System.Drawing.Point(287, 189);
+            this.btnAddParam.Name = "btnAddParam";
+            this.btnAddParam.Size = new System.Drawing.Size(75, 23);
+            this.btnAddParam.TabIndex = 17;
+            this.btnAddParam.Text = "Добавить";
+            this.btnAddParam.UseVisualStyleBackColor = true;
+            this.btnAddParam.Click += new System.EventHandler(this.BtnAddParam_Click);
+            // 
+            // tableViewParam
+            // 
+            this.tableViewParam.AllowUserToAddRows = false;
+            this.tableViewParam.AllowUserToResizeRows = false;
+            this.tableViewParam.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tableViewParam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableViewParam.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.columnName,
+            this.columnValue});
+            this.tableViewParam.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnKeystroke;
+            this.tableViewParam.Location = new System.Drawing.Point(11, 33);
+            this.tableViewParam.MultiSelect = false;
+            this.tableViewParam.Name = "tableViewParam";
+            this.tableViewParam.RowHeadersVisible = false;
+            this.tableViewParam.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.AutoSizeToAllHeaders;
+            this.tableViewParam.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tableViewParam.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tableViewParam.Size = new System.Drawing.Size(438, 150);
+            this.tableViewParam.TabIndex = 0;
+            // 
+            // columnName
+            // 
+            this.columnName.DataPropertyName = "name";
+            this.columnName.HeaderText = "Название";
+            this.columnName.Name = "columnName";
+            // 
+            // columnValue
+            // 
+            this.columnValue.DataPropertyName = "value";
+            dataGridViewCellStyle2.NullValue = null;
+            this.columnValue.DefaultCellStyle = dataGridViewCellStyle2;
+            this.columnValue.HeaderText = "Значение по умолчанию (Int)";
+            this.columnValue.Name = "columnValue";
+            this.columnValue.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.columnValue.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            // 
+            // btnParamDelete
+            // 
+            this.btnParamDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnParamDelete.Location = new System.Drawing.Point(368, 189);
+            this.btnParamDelete.Name = "btnParamDelete";
+            this.btnParamDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnParamDelete.TabIndex = 16;
+            this.btnParamDelete.Text = "Удалить";
+            this.btnParamDelete.UseVisualStyleBackColor = true;
+            this.btnParamDelete.Click += new System.EventHandler(this.BtnParamDelete_Click);
+            // 
             // createAIBindingSource2
             // 
             this.createAIBindingSource2.DataSource = typeof(CourseApplicationAI.CreateAI);
@@ -642,12 +642,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(958, 750);
+            this.ClientSize = new System.Drawing.Size(945, 662);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel7);
+            this.Controls.Add(this.panel6);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.panel4);
-            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.buttonBack);
             this.Controls.Add(this.buttonForward);
@@ -665,22 +665,22 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbActionLeft)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActionUp)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbActionRight)).EndInit();
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableViewFactors)).EndInit();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableViewActionsFactors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableViewFactors)).EndInit();
             this.panel5.ResumeLayout(false);
             this.panel5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableViewActionsFactors)).EndInit();
+            this.panel6.ResumeLayout(false);
+            this.panel6.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nUDY)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nUDX)).EndInit();
-            this.panel7.ResumeLayout(false);
-            this.panel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tableViewParam)).EndInit();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tableViewActions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tableViewParam)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.createAIBindingSource1)).EndInit();
@@ -702,19 +702,19 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button buttonPickPathImages;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button buttonAddFactor;
         private System.Windows.Forms.Button buttonDeleteFactor;
-        private System.Windows.Forms.Panel panel4;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Panel panel5;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.NumericUpDown nUDY;
         private System.Windows.Forms.NumericUpDown nUDX;
-        private System.Windows.Forms.Panel panel7;
+        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView tableViewParam;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Button btnAddParam;

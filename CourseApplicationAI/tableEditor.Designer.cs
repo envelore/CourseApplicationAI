@@ -31,6 +31,7 @@
             this.comboBoxStatement = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panelWatch = new System.Windows.Forms.Panel();
+            this.comboBoxDirection = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.distanceBox = new System.Windows.Forms.NumericUpDown();
             this.imagesBox = new System.Windows.Forms.ComboBox();
@@ -48,7 +49,6 @@
             this.actionBox = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
             this.textBoxID = new System.Windows.Forms.TextBox();
-            this.comboBoxDirection = new System.Windows.Forms.ComboBox();
             this.panelWatch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.distanceBox)).BeginInit();
             this.panelParametr.SuspendLayout();
@@ -90,6 +90,20 @@
             this.panelWatch.Name = "panelWatch";
             this.panelWatch.Size = new System.Drawing.Size(346, 60);
             this.panelWatch.TabIndex = 2;
+            // 
+            // comboBoxDirection
+            // 
+            this.comboBoxDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDirection.FormattingEnabled = true;
+            this.comboBoxDirection.Items.AddRange(new object[] {
+            "сверху",
+            "слева",
+            "снизу",
+            "справа"});
+            this.comboBoxDirection.Location = new System.Drawing.Point(252, 28);
+            this.comboBoxDirection.Name = "comboBoxDirection";
+            this.comboBoxDirection.Size = new System.Drawing.Size(87, 21);
+            this.comboBoxDirection.TabIndex = 4;
             // 
             // label3
             // 
@@ -260,20 +274,6 @@
             this.textBoxID.Name = "textBoxID";
             this.textBoxID.Size = new System.Drawing.Size(155, 20);
             this.textBoxID.TabIndex = 7;
-            // 
-            // comboBoxDirection
-            // 
-            this.comboBoxDirection.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBoxDirection.FormattingEnabled = true;
-            this.comboBoxDirection.Items.AddRange(new object[] {
-            "сверху",
-            "слева",
-            "снизу",
-            "справа"});
-            this.comboBoxDirection.Location = new System.Drawing.Point(252, 28);
-            this.comboBoxDirection.Name = "comboBoxDirection";
-            this.comboBoxDirection.Size = new System.Drawing.Size(87, 21);
-            this.comboBoxDirection.TabIndex = 4;
             // 
             // tableEditor
             // 

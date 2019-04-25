@@ -347,9 +347,8 @@
             this.визулизацияButton = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.testButton = new System.Windows.Forms.Button();
-            this.testText = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.logs = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.панельОтображающаяКарту.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox201)).BeginInit();
@@ -4961,7 +4960,7 @@
             // создатьИИToolStripMenuItem
             // 
             this.создатьИИToolStripMenuItem.Name = "создатьИИToolStripMenuItem";
-            this.создатьИИToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.создатьИИToolStripMenuItem.Size = new System.Drawing.Size(147, 22);
             this.создатьИИToolStripMenuItem.Text = "Создать ИИ...";
             this.создатьИИToolStripMenuItem.Click += new System.EventHandler(this.СоздатьИИToolStripMenuItem_Click);
             // 
@@ -5005,8 +5004,7 @@
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.testButton);
-            this.tabPage1.Controls.Add(this.testText);
+            this.tabPage1.Controls.Add(this.logs);
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
@@ -5014,25 +5012,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "tabPage1";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // testButton
-            // 
-            this.testButton.Location = new System.Drawing.Point(72, 72);
-            this.testButton.Name = "testButton";
-            this.testButton.Size = new System.Drawing.Size(75, 23);
-            this.testButton.TabIndex = 1;
-            this.testButton.Text = "test";
-            this.testButton.UseVisualStyleBackColor = true;
-            this.testButton.Click += new System.EventHandler(this.TestButton_Click);
-            // 
-            // testText
-            // 
-            this.testText.AutoSize = true;
-            this.testText.Location = new System.Drawing.Point(92, 56);
-            this.testText.Name = "testText";
-            this.testText.Size = new System.Drawing.Size(35, 13);
-            this.testText.TabIndex = 0;
-            this.testText.Text = "label1";
             // 
             // tabPage2
             // 
@@ -5043,6 +5022,16 @@
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // logs
+            // 
+            this.logs.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.logs.Location = new System.Drawing.Point(3, 0);
+            this.logs.Name = "logs";
+            this.logs.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.logs.Size = new System.Drawing.Size(218, 655);
+            this.logs.TabIndex = 0;
+            this.logs.Text = "";
             // 
             // основнаяФорма
             // 
@@ -5363,7 +5352,6 @@
             this.верхняяСтрокаМеню.PerformLayout();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -5688,10 +5676,9 @@
         private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem сгенерироватьToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem путьНеЗаданToolStripMenuItem;
-        private System.Windows.Forms.Button testButton;
-        private System.Windows.Forms.Label testText;
         public System.Windows.Forms.Panel панельОтображающаяКарту;
         private System.Windows.Forms.ToolStripMenuItem создатьИИToolStripMenuItem;
+        public System.Windows.Forms.RichTextBox logs;
     }
 }
 
